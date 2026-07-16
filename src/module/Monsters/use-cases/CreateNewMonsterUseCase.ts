@@ -1,4 +1,5 @@
 import { monsterRepository } from "../../../contract/monstersRepository";
+import { InvalidElementMonsterError } from "../../../error/InvalidElementMonsterError";
 import { InvalidNameMonsterError } from "../../../error/InvalidNameMonsterError";
 import { Monsters } from "../../../types/Monster";
 

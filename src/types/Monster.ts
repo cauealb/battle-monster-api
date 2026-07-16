@@ -1,6 +1,6 @@
 export interface Monsters {
     name: string
-    element: string
+    element: 'Fogo' | 'Água' | 'Planta'
     hp: number
     maxHp: number
     attack: number
