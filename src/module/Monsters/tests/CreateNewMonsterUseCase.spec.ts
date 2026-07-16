@@ -3,6 +3,7 @@ import { monsterRepository } from '../../../contract/monstersRepository';
 import { CreateNewMonsterUseCase } from '../use-cases/CreateNewMonsterUseCase';
 import { inMemoryTestMonsters } from '../repositories/inMemoryTestMonster';
 import { Monsters } from '../../../types/Monster';
+import { InvalidNameMonsterError } from '../../../error/InvalidNameMonsterError';
 
 let repository: monsterRepository
 let sut: CreateNewMonsterUseCase
@@ -31,5 +32,19 @@ describe("Create new monster use case test", () => {
         const result = await sut.execute(monster)
         expect(result).toEqual(expect.objectContaining({monster})
         )
+    })
+
+    it("should be able validate name monster", async () => {
+        const monster: Monsters = {
+            name: "",
+            element: "Fogo",
+            hp: 100,
+            maxHp: 100,
+            attack: 50,
+            defense: 5,
+            speed: 80,
+        }
+
+        await expect(async () => await sut.execute(monster)).rejects.toBeInstanceOf(InvalidNameMonsterError)
     })
 })
