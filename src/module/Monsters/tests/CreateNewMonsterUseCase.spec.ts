@@ -4,7 +4,6 @@ import { CreateNewMonsterUseCase } from '../use-cases/CreateNewMonsterUseCase';
 import { inMemoryTestMonsters } from '../repositories/inMemoryTestMonster';
 import { Monsters } from '../../../types/Monster';
 import { InvalidNameMonsterError } from '../../../error/InvalidNameMonsterError';
-import { InvalidElementMonsterError } from '../../../error/InvalidElementMonsterError';
 
 let repository: monsterRepository
 let sut: CreateNewMonsterUseCase
