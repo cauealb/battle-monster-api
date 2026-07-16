@@ -15,15 +15,23 @@ export class BattleMonstersUseCase {
         }
 
         const damegeCalculator = new DamegeCalculator() 
-        while(monster1.hp <= 0 || monster2.hp <= 0) {
-            let attack = monster1;
-            let defense = monster2;
-            
+        let attack = monster1;
+        let defense = monster2;
+
+        while(attack.hp <= 0 || defense.hp <= 0) {
             defense.hp = defense.hp - damegeCalculator.calculate(attack, defense)
 
             let temp = attack;
             attack = defense
             defense = temp
         }
+
+        let winner = '';
+        if(attack.hp <= 0) {
+            winner = defense.name
+        }
+        winner = attack.name
+
+        return { winner }
     }
 }

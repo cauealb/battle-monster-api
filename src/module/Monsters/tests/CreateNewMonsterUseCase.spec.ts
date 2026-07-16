@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { monsterRepository } from '../../../contract/monstersRepository';
 import { CreateNewMonsterUseCase } from '../use-cases/CreateNewMonsterUseCase';
-import { inMemoryTestMonsters } from '../repositories/InMemoryTestMonster';
+import { InMemoryTestMonsters } from '../repositories/InMemoryTestMonster';
 import { Monsters } from '../../../types/Monster';
 import { InvalidNameMonsterError } from '../../../error/InvalidNameMonsterError';
 import { InvalidHpMonsterError } from '../../../error/InvalidHpMonsterError';
@@ -15,7 +15,7 @@ describe("Create new monster use case test", () => {
     // Refactor
 
     beforeEach(() => {
-        repository = new inMemoryTestMonsters;
+        repository = new InMemoryTestMonsters;
         sut = new CreateNewMonsterUseCase(repository);
     })
 

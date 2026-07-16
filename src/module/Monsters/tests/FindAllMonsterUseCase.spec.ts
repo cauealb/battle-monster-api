@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { monsterRepository } from '../../../contract/monstersRepository';
 import { FindAllMonsterUseCase } from '../use-cases/FindAllMonsterUseCase';
-import { inMemoryTestMonsters } from '../repositories/InMemoryTestMonster';
+import { InMemoryTestMonsters } from '../repositories/InMemoryTestMonster';
 import { Monsters } from '../../../types/Monster';
 
 let repository: monsterRepository
@@ -9,7 +9,7 @@ let sut: FindAllMonsterUseCase
 
 describe("Find all monster use case test", () => {
     beforeEach(() => {
-        repository = new inMemoryTestMonsters()
+        repository = new InMemoryTestMonsters()
         sut = new FindAllMonsterUseCase(repository)
     })
 
