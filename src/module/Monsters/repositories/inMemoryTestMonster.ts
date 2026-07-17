@@ -5,12 +5,14 @@ export class InMemoryTestMonsters implements monsterRepository {
     private items: Monsters[] = []
 
     async create(monster: Monsters) {
-        this.items.push(monster);
-        return monster;
+        const dataMonster = {idMonster: this.items.length + 1, ...monster}
+        this.items.push(dataMonster);
+
+        return dataMonster;
     }
 
-    async findByName(nameMonster: string) {
-        const monster = this.items.find(item => item.name === nameMonster)
+    async findById(idMonster: number) {
+        const monster = this.items.find(item => item.idMonster === idMonster)
 
         if(!monster) {
             return null

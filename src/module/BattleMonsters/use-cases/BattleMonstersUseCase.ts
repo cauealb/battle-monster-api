@@ -6,12 +6,12 @@ export class BattleMonstersUseCase {
         private monstersRepository: monsterRepository
     ) {}
 
-    async execute(nameAttacker: string, nameDefender: string) {
-        const monster1 = await this.monstersRepository.findByName(nameAttacker);
-        const monster2 = await this.monstersRepository.findByName(nameDefender);
+    async execute(idAttacker: number, idDefender: number) {
+        const monster1 = await this.monstersRepository.findById(idAttacker);
+        const monster2 = await this.monstersRepository.findById(idDefender);
 
         if(!monster1 || !monster2) {
-            throw new Error('')
+            throw new Error('Error')
         }
         
         const damegeCalculator = new DamegeCalculator() 

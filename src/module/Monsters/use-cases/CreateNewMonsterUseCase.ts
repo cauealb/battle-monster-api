@@ -3,14 +3,10 @@ import { InvalidHpMonsterError } from "../../../error/InvalidHpMonsterError";
 import { InvalidNameMonsterError } from "../../../error/InvalidNameMonsterError";
 import { Monsters } from "../../../types/Monster";
 
-interface CreateNewMonsterUseCaseResponse {
-    monster: Monsters
-}
-
 export class CreateNewMonsterUseCase {
     constructor(private monstersRepository: monsterRepository) {}
 
-    async execute(data: Monsters): Promise<CreateNewMonsterUseCaseResponse> {
+    async execute(data: Monsters) {
         if(data.name.length === 0) {
             throw new InvalidNameMonsterError()
         }
@@ -20,6 +16,6 @@ export class CreateNewMonsterUseCase {
         }
 
         const monster = await this.monstersRepository.create(data);
-        return { monster }
+        return monster
     }
 }

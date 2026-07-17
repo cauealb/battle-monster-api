@@ -10,10 +10,6 @@ let repository: monsterRepository
 let sut: CreateNewMonsterUseCase
 
 describe("Create new monster use case test", () => {
-    // Red
-    // Green
-    // Refactor
-
     beforeEach(() => {
         repository = new InMemoryTestMonsters;
         sut = new CreateNewMonsterUseCase(repository);
@@ -31,7 +27,7 @@ describe("Create new monster use case test", () => {
         }
 
         const result = await sut.execute(monster)
-        expect(result).toEqual(expect.objectContaining({monster})
+        expect(result).toEqual(expect.objectContaining({name: "Dragão", element: "Fogo"})
         )
     })
 

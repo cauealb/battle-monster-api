@@ -13,7 +13,7 @@ describe('Battle Monsters use case', () => {
     })
 
     it("should be able show the winner monster after battle", async () => {
-        await repository.create({
+        const monster1 = await repository.create({
             name: "Dragão",
             element: "Fogo",
             hp: 100,
@@ -23,27 +23,17 @@ describe('Battle Monsters use case', () => {
             speed: 80,
         })
 
-        // await repository.create({
-        //     name: "Goblin",
-        //     element: "Água",
-        //     hp: 100,
-        //     maxHp: 100,
-        //     attack: 10,
-        //     defense: 0,
-        //     speed: 90,
-        // })
-
-        await repository.create({
+        const monster2 = await repository.create({
             name: "Arcanjo",
-            element: "Fogo",
+            element: "Água",
             hp: 500,
             maxHp: 500,
             attack: 90,
             defense: 90,
             speed: 100,
         })
-
-        const result = await sut.execute("Dragão", "Arcanjo")
+        
+        const result = await sut.execute(monster1.idMonster!, monster2.idMonster!)
         expect(result).toEqual(expect.objectContaining({
             winner: "Arcanjo"
         }))
