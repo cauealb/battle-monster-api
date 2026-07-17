@@ -1,19 +1,19 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { monsterRepository } from '../../../contract/monstersRepository';
-import { FindAllMonsterUseCase } from '../use-cases/FindAllMonsterUseCase';
 import { InMemoryTestMonsters } from '../repositories/InMemoryTestMonster';
+import { FindByIdMonsterUseCase } from '../use-cases/FindByIdMonsterUseCase';
 
 let repository: monsterRepository
-let sut: FindAllMonsterUseCase
+let sut: FindByIdMonsterUseCase
 
-describe("Find all monster use case test", () => {
+describe("Find by id monster Use case", () => {
     beforeEach(() => {
         repository = new InMemoryTestMonsters()
-        sut = new FindAllMonsterUseCase(repository)
+        sut = new FindByIdMonsterUseCase(repository)
     })
 
-    it("should be able find all monsters", async () => {
-       await repository.create({
+    it("should be able find by id monster", async () => {
+        await repository.create({
             name: "Dragão",
             element: "Fogo",
             hp: 100,
@@ -33,10 +33,9 @@ describe("Find all monster use case test", () => {
             speed: 90,
         })
 
-        const result = await sut.execute();
-        expect(result).toEqual(expect.arrayContaining([
-            expect.objectContaining({ name: "Dragão" }),
-            expect.objectContaining({ name: "Goblin" })
-        ]))
+        const result = await sut.execute(2);
+        expect(result).toEqual(expect.objectContaining({
+            name: "Goblin"
+        }))
     })
 })
