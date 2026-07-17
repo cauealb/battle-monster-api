@@ -2,6 +2,7 @@ import type { FastifyReply, FastifyRequest } from "fastify";
 import { InMemoryTestMonsters } from "../../module/Monsters/repositories/InMemoryTestMonster.ts";
 import { BattleMonstersUseCase } from "../../module/BattleMonsters/use-cases/BattleMonstersUseCase.ts";
 import z from "zod";
+import { CreateNewMonsterUseCase } from "../../module/Monsters/use-cases/CreateNewMonsterUseCase.ts";
 
 export async function BattleMonsters(request: FastifyRequest, reply: FastifyReply) {
     const bodyBattleSchema = z.object({
@@ -16,8 +17,9 @@ export async function BattleMonsters(request: FastifyRequest, reply: FastifyRepl
 
         const repository = new InMemoryTestMonsters()
         const useCase = new BattleMonstersUseCase(repository)
+        const winner = await useCase.execute(dataBattle.data.idMonster1, dataBattle.data.idMonster2)
 
-        reply.status(200).send(useCase)
+        reply.status(200).send(winner)
     } catch (ex) {
         throw ex
     }
