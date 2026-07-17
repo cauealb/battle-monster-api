@@ -1,10 +1,12 @@
-import {monsterRepository} from '../../../contract/monstersRepository'
-import { DamegeCalculator } from '../functions/DamegeCalculator';
+import type {monsterRepository} from '../../../contract/monstersRepository.ts'
+import { DamegeCalculator } from '../functions/DamegeCalculator.ts';
 
 export class BattleMonstersUseCase {
-    constructor( 
-        private monstersRepository: monsterRepository
-    ) {}
+    private readonly monstersRepository: monsterRepository
+
+    constructor(service: monsterRepository) {
+        this.monstersRepository = service
+    }
 
     async execute(idAttacker: number, idDefender: number) {
         const monster1 = await this.monstersRepository.findById(idAttacker);

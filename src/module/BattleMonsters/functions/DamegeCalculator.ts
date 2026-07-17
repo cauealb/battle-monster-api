@@ -1,4 +1,4 @@
-import { Monsters } from "../../../types/Monster";
+import type { Monsters } from "../../../types/Monster.ts";
 
 export class DamegeCalculator {
     calculate(attacker: Monsters, defender: Monsters) {
