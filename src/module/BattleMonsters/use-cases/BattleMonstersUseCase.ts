@@ -13,25 +13,34 @@ export class BattleMonstersUseCase {
         if(!monster1 || !monster2) {
             throw new Error('')
         }
-
+        
         const damegeCalculator = new DamegeCalculator() 
+        
+        let temp;
         let attack = monster1;
         let defense = monster2;
-
-        while(attack.hp <= 0 || defense.hp <= 0) {
-            defense.hp = defense.hp - damegeCalculator.calculate(attack, defense)
-
-            let temp = attack;
+        let winner = '';
+        
+        if(attack.speed < defense.speed) {
+            temp = attack;
             attack = defense
             defense = temp
         }
 
-        let winner = '';
-        if(attack.hp <= 0) {
-            winner = defense.name
-        }
-        winner = attack.name
+        while(true) {
+            defense.hp = defense.hp - damegeCalculator.calculate(attack, defense)
 
-        return { winner }
+            if(defense.hp <= 0) {
+                winner = attack.name;
+                break;
+            }
+
+            temp = attack;
+            attack = defense
+            defense = temp
+        }
+
+        return { winner } 
+        // TODO: Refactor this!!
     }
 }

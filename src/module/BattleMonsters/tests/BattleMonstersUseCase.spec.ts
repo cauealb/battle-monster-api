@@ -23,19 +23,29 @@ describe('Battle Monsters use case', () => {
             speed: 80,
         })
 
+        // await repository.create({
+        //     name: "Goblin",
+        //     element: "Água",
+        //     hp: 100,
+        //     maxHp: 100,
+        //     attack: 10,
+        //     defense: 0,
+        //     speed: 90,
+        // })
+
         await repository.create({
-            name: "Goblin",
-            element: "Água",
-            hp: 100,
-            maxHp: 100,
-            attack: 10,
-            defense: 0,
-            speed: 90,
+            name: "Arcanjo",
+            element: "Fogo",
+            hp: 500,
+            maxHp: 500,
+            attack: 90,
+            defense: 90,
+            speed: 100,
         })
 
-        const result = await sut.execute("Dragão", "Goblin")
+        const result = await sut.execute("Dragão", "Arcanjo")
         expect(result).toEqual(expect.objectContaining({
-            winner: "Dragão"
+            winner: "Arcanjo"
         }))
     })
 })
