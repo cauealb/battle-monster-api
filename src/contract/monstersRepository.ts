@@ -1,4 +1,4 @@
-import { Monsters } from "../types/Monster"
+import type { Monsters } from "../types/Monster.js"
 
 export interface monsterRepository {
     create(monster: Monsters): Promise<Monsters>
