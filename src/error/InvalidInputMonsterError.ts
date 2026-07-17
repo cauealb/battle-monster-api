@@ -1,5 +1,5 @@
 export class InvalidInputMonsterError extends Error {
     constructor() {
-        super('Some parameters for creating a monster')
+        super('Some parameters is invalid for creating a monster')
     }
 }

@@ -14,10 +14,10 @@ export async function CreateMonster(request: FastifyRequest, reply: FastifyReply
         defense: z.number(),
         speed: z.number()
     })
-
+    
     try {
         const data = bodyMonstersSchema.safeParse(request.body);
-        if(data.error) {
+        if(!data.success) {
             throw new InvalidInputMonsterError()
         }
         
@@ -25,7 +25,6 @@ export async function CreateMonster(request: FastifyRequest, reply: FastifyReply
         const useCase = new CreateNewMonsterUseCase(repository)
         reply.status(201).send(useCase)
     } catch(ex) {
-
-        reply.status(400).send()
+        throw ex
     }
 }

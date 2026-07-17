@@ -19,6 +19,6 @@ export async function BattleMonsters(request: FastifyRequest, reply: FastifyRepl
 
         reply.status(200).send(useCase)
     } catch (ex) {
-        reply.status(400).send()
+        throw ex
     }
 }
