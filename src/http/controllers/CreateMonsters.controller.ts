@@ -23,7 +23,9 @@ export async function CreateMonster(request: FastifyRequest, reply: FastifyReply
         
         const repository = new InMemoryTestMonsters()
         const useCase = new CreateNewMonsterUseCase(repository)
-        reply.status(201).send(useCase)
+        const monster = await useCase.execute(data.data)
+
+        reply.status(201).send(monster)
     } catch(ex) {
         throw ex
     }
