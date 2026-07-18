@@ -1,0 +1,10 @@
+
+services:
+  battle-monsters:
+    image: bitnami/postgresql
+    ports: 
+      - 1212:5432
+    environment:
+      - POSTGRESQL_USERNAME=admin
+      - POSTGRESQL_PASSWORD=1234
+      - POSTGRESQL_DATABASE=battle_monsters
