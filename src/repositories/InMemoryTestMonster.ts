@@ -1,5 +1,5 @@
-import type { monsterRepository } from "../../../contract/monstersRepository.js";
-import type { Monsters } from "../../../types/Monster.js";
+import type { monsterRepository } from "../contract/monstersRepository.js";
+import type { Monsters } from "../types/Monster.ts";
 
 export class InMemoryTestMonsters implements monsterRepository {
     private items: Monsters[] = []

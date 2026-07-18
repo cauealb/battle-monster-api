@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
-import { InMemoryTestMonsters } from "../../module/Monsters/repositories/InMemoryTestMonster.ts";
+import { InMemoryTestMonsters } from "../../repositories/InMemoryTestMonster.ts";
 import { CreateNewMonsterUseCase } from "../../module/Monsters/use-cases/CreateNewMonsterUseCase.ts";
 import { InvalidInputMonsterError } from "../../error/InvalidInputMonsterError.ts";
 

@@ -1,8 +1,7 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import { InMemoryTestMonsters } from "../../module/Monsters/repositories/InMemoryTestMonster.ts";
+import { InMemoryTestMonsters } from "../../repositories/InMemoryTestMonster.ts";
 import { BattleMonstersUseCase } from "../../module/BattleMonsters/use-cases/BattleMonstersUseCase.ts";
 import z from "zod";
-import { CreateNewMonsterUseCase } from "../../module/Monsters/use-cases/CreateNewMonsterUseCase.ts";
 
 export async function BattleMonsters(request: FastifyRequest, reply: FastifyReply) {
     const bodyBattleSchema = z.object({

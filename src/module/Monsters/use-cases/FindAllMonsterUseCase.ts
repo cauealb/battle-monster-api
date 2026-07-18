@@ -1,4 +1,4 @@
-import { monsterRepository } from "../../../contract/monstersRepository";
+import type { monsterRepository } from "../../../contract/monstersRepository.ts";
 
 export class FindAllMonsterUseCase {
     constructor(private monsterRepository: monsterRepository) {}

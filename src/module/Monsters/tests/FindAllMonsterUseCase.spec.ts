@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { monsterRepository } from '../../../contract/monstersRepository.ts';
 import { FindAllMonsterUseCase } from '../use-cases/FindAllMonsterUseCase.ts';
-import { InMemoryTestMonsters } from '../repositories/InMemoryTestMonster.ts';
+import { InMemoryTestMonsters } from '../../../repositories/InMemoryTestMonster.ts';
 
 let repository: monsterRepository
 let sut: FindAllMonsterUseCase

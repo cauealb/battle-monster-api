@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { monsterRepository } from '../../../contract/monstersRepository.ts';
 import { CreateNewMonsterUseCase } from '../use-cases/CreateNewMonsterUseCase.ts';
-import { InMemoryTestMonsters } from '../repositories/InMemoryTestMonster.ts';
+import { InMemoryTestMonsters } from '../../../repositories/InMemoryTestMonster.ts';
 import type { Monsters } from '../../../types/Monster.ts';
 import { InvalidNameMonsterError } from '../../../error/InvalidNameMonsterError.ts';
 import { InvalidHpMonsterError } from '../../../error/InvalidHpMonsterError.ts';
