@@ -11,3 +11,14 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Monster {
+  idMonster Int @id @default(autoincrement())
+  name      String
+  element   String
+  hp        Int
+  maxHp     Int
+  attack    Int
+  defense   Int
+  speed     Int
+}
