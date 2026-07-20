@@ -2,10 +2,10 @@ import type { Monster } from "../../../../generated/prisma/browser.ts";
 
 export class DamegeCalculator {
     calculate(attacker: Monster, defender: Monster) {
-        const multiplacateElement: number = Math.max(this.getMultiplicate(attacker.element, defender.element))
+        const multiplacateElement: number = this.getMultiplicate(attacker.element, defender.element);
         let attack = (attacker.attack - defender.defense) * multiplacateElement;
 
-        return attack
+        return attack <= 0 ? 1 : attack
     }
 
     getMultiplicate(attackerElement: string, defenseElement: string) {

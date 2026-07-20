@@ -5,7 +5,6 @@ export const app = fastify()
 
 app.setErrorHandler((error, request, reply) => {
     if(error instanceof Error) {
-
         reply.status(400).send({
             message: error.message === "" ? "Internal server error" : error.message
         })

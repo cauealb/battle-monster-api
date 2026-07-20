@@ -1,6 +1,7 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { BattleMonstersUseCase } from "../../module/BattleMonsters/use-cases/BattleMonstersUseCase.ts";
 import { PrismaMonsterRepository } from "../../repositories/PrismaMonsterRepository.ts";
+import { ErrorSearchingForMonsterError } from "../../error/ErrorSearchingForMonsterError.ts";
 import z from "zod";
 
 export async function BattleMonsters(request: FastifyRequest, reply: FastifyReply) {
@@ -11,7 +12,7 @@ export async function BattleMonsters(request: FastifyRequest, reply: FastifyRepl
     try {
         const dataBattle = bodyBattleSchema.safeParse(request.body);
         if(dataBattle.error) {
-            throw new Error()
+            throw new ErrorSearchingForMonsterError()
         }
 
         const repository = new PrismaMonsterRepository()
