@@ -29,20 +29,14 @@ export class BattleMonstersUseCase {
             defense = temp
         }
 
-        while(true) {
-            defense.hp = defense.hp - damegeCalculator.calculate(attack, defense)
-
-            if(defense.hp <= 0) {
-                winner = attack.name;
-                break;
-            }
-
+        while(defense.hp > 0) {
             temp = attack;
             attack = defense
             defense = temp
+
+            defense.hp = defense.hp - damegeCalculator.calculate(attack, defense)
         }
 
-        return { winner } 
-        // TODO: Refactor this!!
+        return { winner: attack.name }
     }
 }
