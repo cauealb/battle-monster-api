@@ -1,5 +1,7 @@
-export class InvalidHpMonsterError extends Error {
+import { AppError } from "./AppError.ts";
+
+export class InvalidHpMonsterError extends AppError {
     constructor() {
-        super('Invalid HP Monster!')
+        super('Invalid HP Monster!', 400)
     }
 }

@@ -1,5 +1,7 @@
-export class InvalidNameMonsterError extends Error {
+import { AppError } from "./AppError.ts";
+
+export class InvalidNameMonsterError extends AppError {
     constructor() {
-        super('Invalid name monster!')
+        super('Invalid name monster!', 400)
     }
 }

@@ -1,4 +1,5 @@
 import type {monsterRepository} from '../../../contract/monstersRepository.ts'
+import { ThereIsSomethingWrongWithIDsError } from '../../../error/ThereIsSomethingWrongWithIDsError.ts';
 import { DamegeCalculator } from '../functions/DamegeCalculator.ts';
 
 export class BattleMonstersUseCase {
@@ -13,7 +14,7 @@ export class BattleMonstersUseCase {
         const monster2 = await this.monstersRepository.findById(idDefender);
 
         if(!monster1 || !monster2) {
-            throw new Error('Error')
+            throw new ThereIsSomethingWrongWithIDsError()
         }
         
         const damegeCalculator = new DamegeCalculator() 
