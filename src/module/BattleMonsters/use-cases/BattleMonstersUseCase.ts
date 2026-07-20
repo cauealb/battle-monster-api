@@ -21,7 +21,6 @@ export class BattleMonstersUseCase {
         let temp;
         let attack = monster1;
         let defense = monster2;
-        let winner = '';
         
         if(attack.speed < defense.speed) {
             temp = attack;
@@ -29,14 +28,14 @@ export class BattleMonstersUseCase {
             defense = temp
         }
 
-        while(defense.hp > 0) {
+        while(true) {
+            defense.hp = defense.hp - damegeCalculator.calculate(attack, defense)
+
+            if(defense.hp <= 0) return { winner: attack.name }
+
             temp = attack;
             attack = defense
             defense = temp
-
-            defense.hp = defense.hp - damegeCalculator.calculate(attack, defense)
         }
-
-        return { winner: attack.name }
     }
 }
