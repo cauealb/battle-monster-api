@@ -1,8 +1,9 @@
+import type { Monster } from "../../generated/prisma/browser.ts";
 import type { monsterRepository } from "../contract/monstersRepository.js";
 import type { Monsters } from "../types/Monster.ts";
 
 export class InMemoryTestMonsters implements monsterRepository {
-    private items: Monsters[] = []
+    private items: Monster[] = []
 
     async create(monster: Monsters) {
         const dataMonster = {idMonster: this.items.length + 1, ...monster}
