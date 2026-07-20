@@ -1,8 +1,8 @@
-import type { Monster } from "../../generated/prisma/browser.ts"
-import type { MonsterCreateInput } from "../../generated/prisma/models.ts"
+import type { Monster } from "../module/Monsters/types/Monster.ts"
+import type { MonsterCreate } from "../module/Monsters/types/MonsterCreate.ts"
 
 export interface monsterRepository {
-    create(monster: MonsterCreateInput): Promise<Monster>
+    create(monster: MonsterCreate): Promise<Monster>
 
     findById(idMonster: number): Promise<Monster | null>
     findAll(): Promise<Monster[]>

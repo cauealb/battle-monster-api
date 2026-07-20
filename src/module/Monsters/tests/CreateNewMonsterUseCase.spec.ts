@@ -2,21 +2,21 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import type { monsterRepository } from '../../../contract/monstersRepository.ts';
 import { CreateNewMonsterUseCase } from '../use-cases/CreateNewMonsterUseCase.ts';
 import { InMemoryTestMonsters } from '../../../repositories/InMemoryTestMonster.ts';
-import type { Monsters } from '../../../types/Monster.ts';
 import { InvalidNameMonsterError } from '../../../error/InvalidNameMonsterError.ts';
 import { InvalidHpMonsterError } from '../../../error/InvalidHpMonsterError.ts';
+import type { MonsterCreate } from '../types/MonsterCreate.ts';
 
 let repository: monsterRepository
 let sut: CreateNewMonsterUseCase
 
 describe("Create new monster use case test", () => {
     beforeEach(() => {
-        repository = new InMemoryTestMonsters;
+        repository = new InMemoryTestMonsters();
         sut = new CreateNewMonsterUseCase(repository);
     })
 
     it("should be able create a new monster", async () => {
-        const monster: Monsters = {
+        const monster: MonsterCreate = {
             name: "Dragão",
             element: "Fogo",
             hp: 100,
@@ -32,7 +32,7 @@ describe("Create new monster use case test", () => {
     })
 
     it("should be able validate name monster", async () => {
-        const monster: Monsters = {
+        const monster: MonsterCreate = {
             name: "",
             element: "Fogo",
             hp: 100,
@@ -46,7 +46,7 @@ describe("Create new monster use case test", () => {
     })
 
     it("should be able validate hp and maxHp",async () => {
-        const monster: Monsters = {
+        const monster: MonsterCreate = {
             name: "Dragão",
             element: "Fogo",
             hp: 100,

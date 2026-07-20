@@ -1,7 +1,7 @@
-import type { MonsterCreateInput } from "../../../../generated/prisma/models.ts";
 import type { monsterRepository } from "../../../contract/monstersRepository.ts";
 import { InvalidHpMonsterError } from "../../../error/InvalidHpMonsterError.ts";
 import { InvalidNameMonsterError } from "../../../error/InvalidNameMonsterError.ts";
+import type { MonsterCreate } from "../types/MonsterCreate.ts";
 
 export class CreateNewMonsterUseCase {
     private readonly monstersRepository: monsterRepository
@@ -10,7 +10,7 @@ export class CreateNewMonsterUseCase {
         this.monstersRepository = repository
     }
 
-    async execute(data: MonsterCreateInput) {
+    async execute(data: MonsterCreate) {
         if(data.name.length === 0) {
             throw new InvalidNameMonsterError()
         }
