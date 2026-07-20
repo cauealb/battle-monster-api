@@ -1,8 +1,8 @@
-import type { Monsters } from "../../../types/Monster.ts";
+import type { Monster } from "../../../../generated/prisma/browser.ts";
 
 export class DamegeCalculator {
-    calculate(attacker: Monsters, defender: Monsters) {
-        const multiplacateElement: number = this.getMultiplicate(attacker.element, defender.element)
+    calculate(attacker: Monster, defender: Monster) {
+        const multiplacateElement: number = Math.max(this.getMultiplicate(attacker.element, defender.element))
         let attack = (attacker.attack - defender.defense) * multiplacateElement;
 
         return attack
