@@ -46,7 +46,7 @@ describe('Battle Monsters use case', () => {
     })
 
     it("should be able if is same monster (Attack and Defense)", async () => {
-        await repository.create({
+        const monster = await repository.create({
             name: "Dragão",
             element: "Fogo",
             hp: 100,
@@ -56,6 +56,60 @@ describe('Battle Monsters use case', () => {
             speed: 80,
         })
 
-        await expect(async () => await sut.execute(1, 1)).rejects.toBeInstanceOf(ErrorSameMonsterInTheSameBattleError)
+        await expect(async () => await sut.execute(monster.idMonster, monster.idMonster)).rejects.toBeInstanceOf(ErrorSameMonsterInTheSameBattleError)
+    })
+
+    it("should be able validate elements advantageous", async () => {
+        const monster1 = await repository.create({
+            name: "Dragão",
+            element: "Fogo",
+            hp: 100,
+            maxHp: 50,
+            attack: 50,
+            defense: 5,
+            speed: 80,
+        })
+
+        const monster2 = await repository.create({
+            name: "Leviatã",
+            element: "Água",
+            hp: 100,
+            maxHp: 50,
+            attack: 50,
+            defense: 5,
+            speed: 80,
+        })
+
+        const result = await sut.execute(monster1.idMonster, monster2.idMonster)
+        expect(result).toEqual(expect.objectContaining({
+            winner: "Leviatã"
+        }))
+    })
+
+    it("should be able validade monster same speed", async () => {
+        const monster1 = await repository.create({
+            name: "Guan-ferrão",
+            element: "Planta",
+            hp: 100,
+            maxHp: 50,
+            attack: 50,
+            defense: 5,
+            speed: 80,
+        })
+
+        const monster2 = await repository.create({
+            name: "Guan-ferrão",
+            element: "Planta",
+            hp: 100,
+            maxHp: 50,
+            attack: 50,
+            defense: 5,
+            speed: 80,
+        })
+
+        const result = await sut.execute(monster1.idMonster, monster2.idMonster)
+        expect(result).toEqual(expect.objectContaining({
+            winner: "Guan-ferrão"
+        }))
     })
 })
