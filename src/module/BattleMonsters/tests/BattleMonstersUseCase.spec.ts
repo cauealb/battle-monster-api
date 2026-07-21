@@ -59,7 +59,7 @@ describe('Battle Monsters use case', () => {
         await expect(async () => await sut.execute(monster.idMonster, monster.idMonster)).rejects.toBeInstanceOf(ErrorSameMonsterInTheSameBattleError)
     })
 
-    it("should be able validate elements advantageous", async () => {
+    it("should be able validate disadvantageous elements", async () => {
         const monster1 = await repository.create({
             name: "Dragão",
             element: "Fogo",
@@ -84,6 +84,82 @@ describe('Battle Monsters use case', () => {
         expect(result).toEqual(expect.objectContaining({
             winner: "Leviatã"
         }))
+    })
+
+    it("should be able validate battle with fire and plant", async () => {
+        const monster1 = await repository.create({
+            name: "Elemental do fogo",
+            element: "Fogo",
+            hp: 100,
+            maxHp: 100,
+            attack: 80,
+            defense: 70,
+            speed: 10,
+        })
+
+        const monster2 = await repository.create({
+            name: "Espirradeira",
+            element: "Planta",
+            hp: 100,
+            maxHp: 100,
+            attack: 90,
+            defense: 1,
+            speed: 50,
+        })
+
+        const result = await sut.execute(monster1.idMonster, monster2.idMonster);
+        expect(result).toEqual(expect.objectContaining({
+            winner: "Elemental do fogo"
+        }))
+    })
+
+    it("should be able validate battle with plant and water", async () => {
+        const monster1 = await repository.create({
+            name: "Espirradeira",
+            element: "Planta",
+            hp: 100,
+            maxHp: 100,
+            attack: 90,
+            defense: 1,
+            speed: 50,
+        })
+
+        const monster2 = await repository.create({
+            name: "Leviatã",
+            element: "Água",
+            hp: 100,
+            maxHp: 100,
+            attack: 10,
+            defense: 5,
+            speed: 10,
+        })
+
+        const result = await sut.execute(monster1.idMonster, monster2.idMonster);
+        expect(result).toEqual(expect.objectContaining({
+            winner: "Espirradeira"
+        }))
+    })
+
+    it("should be able validate minimum damage", async () => {
+        const monster1 = await repository.create({
+            name: "Espirradeira",
+            element: "Planta",
+            hp: 100,
+            maxHp: 100,
+            attack: 90,
+            defense: 1,
+            speed: 50,
+        })
+
+        const monster2 = await repository.create({
+            name: "Leviatã",
+            element: "Água",
+            hp: 100,
+            maxHp: 100,
+            attack: 10,
+            defense: 5,
+            speed: 10,
+        })
     })
 
     it("should be able validate execute the battle, and if the monsters same, winner is first monster", async () => {
