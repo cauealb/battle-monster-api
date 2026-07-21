@@ -140,28 +140,6 @@ describe('Battle Monsters use case', () => {
         }))
     })
 
-    it("should be able validate minimum damage", async () => {
-        const monster1 = await repository.create({
-            name: "Espirradeira",
-            element: "Planta",
-            hp: 100,
-            maxHp: 100,
-            attack: 90,
-            defense: 1,
-            speed: 50,
-        })
-
-        const monster2 = await repository.create({
-            name: "Leviatã",
-            element: "Água",
-            hp: 100,
-            maxHp: 100,
-            attack: 10,
-            defense: 5,
-            speed: 10,
-        })
-    })
-
     it("should be able validate execute the battle, and if the monsters same, winner is first monster", async () => {
         const monster1 = await repository.create({
             name: "Dragão",
