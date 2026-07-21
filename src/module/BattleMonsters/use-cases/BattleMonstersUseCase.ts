@@ -1,4 +1,5 @@
 import type {monsterRepository} from '../../../contract/monstersRepository.ts'
+import { ErrorSameMonsterInTheSameBattleError } from '../../../error/ErrorSameMonsterInTheSameBattleError.ts';
 import { ThereIsSomethingWrongWithIDsError } from '../../../error/ThereIsSomethingWrongWithIDsError.ts';
 import { DamageCalculator } from '../functions/DamageCalculator.ts';
 
@@ -10,6 +11,8 @@ export class BattleMonstersUseCase {
     }
 
     async execute(idAttacker: number, idDefender: number) {
+        if(idAttacker === idDefender) throw new ErrorSameMonsterInTheSameBattleError()
+
         const monster1 = await this.monstersRepository.findById(idAttacker);
         const monster2 = await this.monstersRepository.findById(idDefender);
 

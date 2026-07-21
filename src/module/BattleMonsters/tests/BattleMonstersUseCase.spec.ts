@@ -2,6 +2,8 @@ import { describe, it, beforeEach, expect } from 'vitest';
 import type { monsterRepository } from '../../../contract/monstersRepository.ts';
 import { BattleMonstersUseCase } from '../use-cases/BattleMonstersUseCase.ts';
 import { InMemoryTestMonsters } from '../../../repositories/InMemoryTestMonster.ts';
+import { ThereIsSomethingWrongWithIDsError } from '../../../error/ThereIsSomethingWrongWithIDsError.ts';
+import { ErrorSameMonsterInTheSameBattleError } from '../../../error/ErrorSameMonsterInTheSameBattleError.ts';
 
 let repository: monsterRepository
 let sut: BattleMonstersUseCase
@@ -39,5 +41,21 @@ describe('Battle Monsters use case', () => {
         }))
     })
 
-    
+    it("should be able to verify whether the monster was created before the battle.", async () => {
+        await expect(async () => await sut.execute(3, 4)).rejects.toBeInstanceOf(ThereIsSomethingWrongWithIDsError)
+    })
+
+    it("should be able if is same monster (Attack and Defense)", async () => {
+        await repository.create({
+            name: "Dragão",
+            element: "Fogo",
+            hp: 100,
+            maxHp: 50,
+            attack: 50,
+            defense: 5,
+            speed: 80,
+        })
+
+        await expect(async () => await sut.execute(1, 1)).rejects.toBeInstanceOf(ErrorSameMonsterInTheSameBattleError)
+    })
 })
