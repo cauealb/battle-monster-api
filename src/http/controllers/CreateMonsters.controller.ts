@@ -6,13 +6,13 @@ import z from "zod";
 
 export async function CreateMonster(request: FastifyRequest, reply: FastifyReply) {
     const bodyMonstersSchema = z.object({
-        name: z.string(),
+        name: z.string().min(3, "O nome deve ter pelo menos 3 caracteres"),
         element: z.enum(["Fogo", "Planta", "Água"]),
-        hp: z.number(),
-        maxHp: z.number(),
-        attack: z.number(),
-        defense: z.number(),
-        speed: z.number()
+        hp: z.number().positive().int(),
+        maxHp: z.number().positive().int(),
+        attack: z.number().positive().int(),
+        defense: z.number().positive().int(),
+        speed: z.number().positive().int()
     })
     
     try {

@@ -1,9 +1,9 @@
 import type { Monster } from "../../../../generated/prisma/browser.ts";
 
-export class DamegeCalculator {
+export class DamageCalculator {
     calculate(attacker: Monster, defender: Monster) {
-        const multiplacateElement: number = this.getMultiplicate(attacker.element, defender.element);
-        let attack = (attacker.attack - defender.defense) * multiplacateElement;
+        const multiplierElement: number = this.getMultiplicate(attacker.element, defender.element);
+        let attack = (attacker.attack - defender.defense) * multiplierElement;
 
         return attack <= 0 ? 1 : attack
     }

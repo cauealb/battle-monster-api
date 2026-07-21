@@ -1,6 +1,6 @@
 import type {monsterRepository} from '../../../contract/monstersRepository.ts'
 import { ThereIsSomethingWrongWithIDsError } from '../../../error/ThereIsSomethingWrongWithIDsError.ts';
-import { DamegeCalculator } from '../functions/DamegeCalculator.ts';
+import { DamageCalculator } from '../functions/DamageCalculator.ts';
 
 export class BattleMonstersUseCase {
     private readonly monstersRepository: monsterRepository
@@ -17,26 +17,26 @@ export class BattleMonstersUseCase {
             throw new ThereIsSomethingWrongWithIDsError()
         }
         
-        const damegeCalculator = new DamegeCalculator() 
+        const damegeCalculator = new DamageCalculator() 
         
         let temp;
         let attack = monster1;
-        let defense = monster2;
+        let defender = monster2;
         
-        if(attack.speed < defense.speed) {
+        if(attack.speed < defender.speed) {
             temp = attack;
-            attack = defense
-            defense = temp
+            attack = defender
+            defender = temp
         }
 
         while(true) {
-            defense.hp = defense.hp - damegeCalculator.calculate(attack, defense)
+            defender.hp = defender.hp - damegeCalculator.calculate(attack, defender)
 
-            if(defense.hp <= 0) return { winner: attack.name }
+            if(defender.hp <= 0) return { winner: attack.name }
 
             temp = attack;
-            attack = defense
-            defense = temp
+            attack = defender
+            defender = temp
         }
     }
 }
