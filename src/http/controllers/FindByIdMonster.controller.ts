@@ -6,7 +6,7 @@ import { ErrorSearchingForMonsterError } from "../../error/ErrorSearchingForMons
 import { NoMonsterFoundError } from "../../error/NoMonsterFoundError.ts";
 
 export async function FindByIdMonster(request: FastifyRequest, reply: FastifyReply) {
-    const idParamsShema = z.object({ idMonster: z.coerce.number() });
+    const idParamsShema = z.object({ idMonster: z.coerce.number().positive().int() });
 
     try {
         const data = idParamsShema.safeParse(request.params);

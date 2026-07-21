@@ -23,8 +23,8 @@ export class BattleMonstersUseCase {
         const damegeCalculator = new DamageCalculator() 
         
         let temp;
-        let attack = monster1;
-        let defender = monster2;
+        let attack = {...monster1};
+        let defender = {...monster2};
         
         if(attack.speed < defender.speed) {
             temp = attack;

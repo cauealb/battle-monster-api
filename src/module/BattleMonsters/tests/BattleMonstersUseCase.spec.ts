@@ -50,7 +50,7 @@ describe('Battle Monsters use case', () => {
             name: "Dragão",
             element: "Fogo",
             hp: 100,
-            maxHp: 50,
+            maxHp: 100,
             attack: 50,
             defense: 5,
             speed: 80,
@@ -64,7 +64,7 @@ describe('Battle Monsters use case', () => {
             name: "Dragão",
             element: "Fogo",
             hp: 100,
-            maxHp: 50,
+            maxHp: 100,
             attack: 50,
             defense: 5,
             speed: 80,
@@ -74,7 +74,7 @@ describe('Battle Monsters use case', () => {
             name: "Leviatã",
             element: "Água",
             hp: 100,
-            maxHp: 50,
+            maxHp: 100,
             attack: 50,
             defense: 5,
             speed: 80,
@@ -86,22 +86,22 @@ describe('Battle Monsters use case', () => {
         }))
     })
 
-    it("should be able validade monster same speed", async () => {
+    it("should be able validate execute the battle, and if the monsters same, winner is first monster", async () => {
         const monster1 = await repository.create({
-            name: "Guan-ferrão",
-            element: "Planta",
+            name: "Dragão",
+            element: "Fogo",
             hp: 100,
-            maxHp: 50,
+            maxHp: 100,
             attack: 50,
             defense: 5,
             speed: 80,
         })
 
         const monster2 = await repository.create({
-            name: "Guan-ferrão",
-            element: "Planta",
+            name: "Leviatã",
+            element: "Fogo",
             hp: 100,
-            maxHp: 50,
+            maxHp: 100,
             attack: 50,
             defense: 5,
             speed: 80,
@@ -109,7 +109,48 @@ describe('Battle Monsters use case', () => {
 
         const result = await sut.execute(monster1.idMonster, monster2.idMonster)
         expect(result).toEqual(expect.objectContaining({
-            winner: "Guan-ferrão"
+            winner: "Dragão"
         }))
+    })
+
+    it("should be able validate monster hps before the battle", async () => {
+        const hpMonster1 = 100;
+        const hpMonster2 = 120;
+
+        const monster1 = await repository.create({
+            name: "Dragão",
+            element: "Fogo",
+            hp: hpMonster1,
+            maxHp: hpMonster1,
+            attack: 50,
+            defense: 5,
+            speed: 80,
+        })
+
+        const monster2 = await repository.create({
+            name: "Leviatã",
+            element: "Água",
+            hp: hpMonster2,
+            maxHp: hpMonster2,
+            attack: 50,
+            defense: 5,
+            speed: 80,
+        })
+
+        await sut.execute(monster1.idMonster, monster2.idMonster)
+
+        const monster1Update = await repository.findById(monster1.idMonster);
+        const monster2Update = await repository.findById(monster2.idMonster);
+
+        const result = {
+            monster1: monster1Update!.hp,
+            monster2: monster2Update!.hp
+        }
+
+        expect(result).toEqual(expect.objectContaining({
+            monster1: hpMonster1,
+            monster2: hpMonster2
+        }))
+
     })
 })
