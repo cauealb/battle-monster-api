@@ -2,8 +2,8 @@ import type { FastifyReply, FastifyRequest } from "fastify";
 import { PrismaMonsterRepository } from "../../repositories/PrismaMonsterRepository.ts";
 import { FindByIdMonsterUseCase } from "../../module/Monsters/use-cases/FindByIdMonsterUseCase.ts";
 import z from "zod";
-import { NoMonstersFoundError } from "../../error/NoMonstersFoundError.ts";
 import { ErrorSearchingForMonsterError } from "../../error/ErrorSearchingForMonsterError.ts";
+import { NoMonsterFoundError } from "../../error/NoMonsterFoundError.ts";
 
 export async function FindByIdMonster(request: FastifyRequest, reply: FastifyReply) {
     const idParamsShema = z.object({ idMonster: z.coerce.number() });
@@ -19,7 +19,7 @@ export async function FindByIdMonster(request: FastifyRequest, reply: FastifyRep
 
         const monster = await useCase.execute(data.data.idMonster);
         if(!monster) {
-            throw new NoMonstersFoundError()
+            throw new NoMonsterFoundError()
         }
 
         return reply.status(200).send(monster)

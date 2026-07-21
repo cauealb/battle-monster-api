@@ -6,7 +6,7 @@ import z from "zod";
 
 export async function BattleMonsters(request: FastifyRequest, reply: FastifyReply) {
     const bodyBattleSchema = z.object({
-        idMonster1: z.coerce.number(), idMonster2: z.coerce.number()
+        idMonster1: z.coerce.number().positive().int(), idMonster2: z.coerce.number().positive().int()
     })
 
     try {

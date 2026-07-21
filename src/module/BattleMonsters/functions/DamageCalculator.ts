@@ -1,4 +1,4 @@
-import type { Monster } from "../../../../generated/prisma/browser.ts";
+import type { Monster } from "../../Monsters/types/Monster.ts";
 
 export class DamageCalculator {
     calculate(attacker: Monster, defender: Monster) {
